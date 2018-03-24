@@ -8,27 +8,10 @@
 import scrapy
 
 
-class KimiajItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    title = scrapy.Field()
-    link = scrapy.Field()
-    content = scrapy.Field()
-    author = scrapy.Field()
-    date = scrapy.Field()
-    reply = scrapy.Field()
 
-
-class WangyiItem(scrapy.Item):
+class PacificItem(scrapy.Item):
     title = scrapy.Field()
     link = scrapy.Field()
     desc = scrapy.Field()
     author = scrapy.Field()
     date = scrapy.Field()
-
-class SinaItem(scrapy.Item):
-    title = scrapy.Field()
-    link = scrapy.Field()
-    desc = scrapy.Field()
-    date = scrapy.Field()
-    source = scrapy.Field()

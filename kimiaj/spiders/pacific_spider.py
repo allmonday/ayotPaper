@@ -1,12 +1,12 @@
 #coding: utf-8
 import re
 import scrapy
-from kimiaj.items import WangyiItem 
+from kimiaj.items import PacificItem 
 
-class TianyaSpider(scrapy.Spider):
+class PacificSpider(scrapy.Spider):
 
-    name = 'wangyi'
-    start_urls = ['http://bbs.163.com/bbs/search.do?q=%E4%BA%8C%E5%AD%A9&boardid=photo&searchType=title&searchRan=bbs&orderbytime=n&pageid=1']
+    name = 'pacific'
+    start_urls = ['https://bbs.pcbaby.com.cn/forum-1914.html']
 
     def parse(self, response):
 
@@ -16,7 +16,7 @@ class TianyaSpider(scrapy.Spider):
 
         for article in articles:
             try:
-                item = WangyiItem()
+                item = PacificItem()
                 item['title'] = ''.join(article.css('h3>a ::text').extract())
                 item['link'] = article.css('h3>a ::attr(href)').extract_first()
                 item['desc'] = ''.join(article.css('.textA::text').extract()).strip()
@@ -29,4 +29,4 @@ class TianyaSpider(scrapy.Spider):
                 continue
 
         if next_page:
-            yield scrapy.Request('http://bbs.163.com/bbs/search.do?q=%E4%BA%8C%E5%AD%A9&boardid=photo&searchType=title&searchRan=bbs&orderbytime=n&pageid={}'.format(next_page), callback=self.parse)
+            yield scrapy.Request('https://bbs.pcbaby.com.cn/forum-{}.html'.format(next_page), callback=self.parse)
